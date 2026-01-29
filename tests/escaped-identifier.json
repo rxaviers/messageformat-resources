@@ -1,0 +1,27 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["key=with=equals"],
+          "value": "Value"
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["key.with.dots"],
+          "value": "Another value"
+        }
+      ]
+    }
+  ]
+}

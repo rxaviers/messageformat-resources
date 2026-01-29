@@ -1,0 +1,29 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "Greeting message with personalization",
+          "meta": [
+            {
+              "key": "param",
+              "value": "$name - The user's display name"
+            },
+            {
+              "key": "example",
+              "value": "Hello, Alice!"
+            }
+          ],
+          "id": ["hello"],
+          "value": "Hello, {$name}!"
+        }
+      ]
+    }
+  ]
+}

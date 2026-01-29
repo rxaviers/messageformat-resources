@@ -1,0 +1,20 @@
+{
+  "comment": "First line of comment\nSecond line of comment\nThird line of comment",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["hello"],
+          "value": "Hello"
+        }
+      ]
+    }
+  ]
+}

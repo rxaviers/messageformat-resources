@@ -1,0 +1,3 @@
+---
+crlf = Line 1\r\nLine 2
+cr-only = Before\rAfter

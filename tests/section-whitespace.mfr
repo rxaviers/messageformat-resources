@@ -1,0 +1,6 @@
+---
+[ section ]
+msg = Hello
+
+[  section2  ]
+msg2 = World

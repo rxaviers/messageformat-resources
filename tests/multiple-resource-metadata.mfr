@@ -1,0 +1,6 @@
+@locale en-US
+@author Alice
+@reviewer Bob
+@created 2024-01-01
+---
+msg = Hello

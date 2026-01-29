@@ -1,0 +1,30 @@
+# This is the main resource file for the application.
+# It contains all UI strings.
+@locale en-US
+@version 1.0
+---
+
+# General greeting messages
+@category greetings
+hello = Hello, world!
+
+@param $name - The user's name
+greeting = Hello, {$name}!
+
+[errors]
+
+# Validation errors shown to users
+@severity error
+required = This field is required.
+
+@param $min - Minimum length
+@param $max - Maximum length
+length =
+  .input {$min :integer}
+  .input {$max :integer}
+  .match $min $max
+  * * {{Length must be between {$min} and {$max} characters.}}
+
+[errors.network]
+
+timeout = The request timed out. Please try again.

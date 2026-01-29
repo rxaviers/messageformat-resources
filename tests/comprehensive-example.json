@@ -1,0 +1,95 @@
+{
+  "comment": "This is the main resource file for the application.\nIt contains all UI strings.",
+  "meta": [
+    {
+      "key": "locale",
+      "value": "en-US"
+    },
+    {
+      "key": "version",
+      "value": "1.0"
+    }
+  ],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "General greeting messages",
+          "meta": [
+            {
+              "key": "category",
+              "value": "greetings"
+            }
+          ],
+          "id": ["hello"],
+          "value": "Hello, world!"
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [
+            {
+              "key": "param",
+              "value": "$name - The user's name"
+            }
+          ],
+          "id": ["greeting"],
+          "value": "Hello, {$name}!"
+        }
+      ]
+    },
+    {
+      "comment": "",
+      "meta": [],
+      "id": ["errors"],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "Validation errors shown to users",
+          "meta": [
+            {
+              "key": "severity",
+              "value": "error"
+            }
+          ],
+          "id": ["required"],
+          "value": "This field is required."
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [
+            {
+              "key": "param",
+              "value": "$min - Minimum length"
+            },
+            {
+              "key": "param",
+              "value": "$max - Maximum length"
+            }
+          ],
+          "id": ["length"],
+          "value": "\n.input {$min :integer}\n.input {$max :integer}\n.match $min $max\n* * {{Length must be between {$min} and {$max} characters.}}"
+        }
+      ]
+    },
+    {
+      "comment": "",
+      "meta": [],
+      "id": ["errors", "network"],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["timeout"],
+          "value": "The request timed out. Please try again."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "comment": "",
+  "meta": [
+    {
+      "key": "locale",
+      "value": "en-US"
+    }
+  ],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["hello"],
+          "value": "Hello"
+        }
+      ]
+    }
+  ]
+}

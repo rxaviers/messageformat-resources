@@ -1,0 +1,20 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "First line\n\nThird line after empty",
+          "meta": [],
+          "id": ["message"],
+          "value": "Hello"
+        }
+      ]
+    }
+  ]
+}

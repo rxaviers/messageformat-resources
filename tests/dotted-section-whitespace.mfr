@@ -1,0 +1,6 @@
+---
+[a . b]
+msg = Hello
+
+[a.b.c]
+msg2 = World

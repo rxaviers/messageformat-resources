@@ -1,0 +1,25 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [
+            {
+              "key": "description",
+              "value": "This is a very long description\nthat spans multiple lines\nand has lots of detail."
+            }
+          ],
+          "id": ["message"],
+          "value": "Hello"
+        }
+      ]
+    }
+  ]
+}

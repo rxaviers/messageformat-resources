@@ -1,0 +1,34 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["日本語"],
+          "value": "Japanese"
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["中文"],
+          "value": "Chinese"
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["العربية"],
+          "value": "Arabic"
+        }
+      ]
+    }
+  ]
+}

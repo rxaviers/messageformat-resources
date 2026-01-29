@@ -1,0 +1,20 @@
+{
+  "comment": "This is a resource comment",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["hello"],
+          "value": "Hello"
+        }
+      ]
+    }
+  ]
+}

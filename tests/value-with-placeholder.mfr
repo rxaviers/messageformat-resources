@@ -1,0 +1,4 @@
+---
+simple = Hello, {$name}!
+formatted = The date is {$date :datetime}.
+multiple = {$greeting}, {$name}! You have {$count :integer} messages.

@@ -1,0 +1,6 @@
+---
+long-key-that-is-very-\
+  long = Short value
+
+short = Long value that is \
+  continued on the next line

@@ -1,0 +1,25 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [
+            {
+              "key": "param",
+              "value": "$name - The user's name"
+            }
+          ],
+          "id": ["hello"],
+          "value": "Hello, {$name}!"
+        }
+      ]
+    }
+  ]
+}

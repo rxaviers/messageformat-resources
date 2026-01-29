@@ -1,0 +1,21 @@
+{
+  "comment": "Just a comment file\nWith multiple lines",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "comment",
+          "comment": "A standalone comment in the body"
+        },
+        {
+          "type": "comment",
+          "comment": "Another standalone comment"
+        }
+      ]
+    }
+  ]
+}

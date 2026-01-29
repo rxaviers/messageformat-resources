@@ -1,0 +1,27 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["empty"],
+          "value": ""
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["also-empty"],
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

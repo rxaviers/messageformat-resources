@@ -1,0 +1,7 @@
+---
+count =
+  .input {$count :integer}
+  .match $count
+  0   {{You have no messages.}}
+  one {{You have {$count} message.}}
+  *   {{You have {$count} messages.}}

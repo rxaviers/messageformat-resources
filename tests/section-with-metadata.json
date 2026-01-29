@@ -1,0 +1,25 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [
+        {
+          "key": "do-not-translate",
+          "value": ""
+        }
+      ],
+      "id": ["brand"],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["name"],
+          "value": "Acme Corp"
+        }
+      ]
+    }
+  ]
+}

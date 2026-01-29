@@ -1,0 +1,26 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": ["empty"],
+      "entries": []
+    },
+    {
+      "comment": "",
+      "meta": [],
+      "id": ["not-empty"],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["msg"],
+          "value": "Hello"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+---
+msg1 = First
+
+# This comment is standalone because of empty line
+
+# This comment attaches to the section
+[section]
+msg2 = Second

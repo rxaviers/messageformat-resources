@@ -1,0 +1,4 @@
+---
+# Error messages for validation
+[errors]
+required = This field is required

@@ -1,0 +1,20 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["formatted"],
+          "value": "Line 1\nLine 2\tTabbed"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "comment": "Resource comment",
+  "meta": [
+    {
+      "key": "locale",
+      "value": "en-US"
+    },
+    {
+      "key": "author",
+      "value": "John Doe"
+    }
+  ],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["hello"],
+          "value": "Hello"
+        }
+      ]
+    }
+  ]
+}

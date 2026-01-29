@@ -1,0 +1,7 @@
+---
+hello = Hello
+
+# This is a standalone comment that
+# is not attached to any entry
+
+goodbye = Goodbye

@@ -1,0 +1,27 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["long-key-that-is-very-long"],
+          "value": "Short value"
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["short"],
+          "value": "Long value that is continued on the next line"
+        }
+      ]
+    }
+  ]
+}

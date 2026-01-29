@@ -1,0 +1,8 @@
+---
+[ui.buttons]
+save = Save
+cancel = Cancel
+
+[ui.labels]
+name = Name
+email = Email

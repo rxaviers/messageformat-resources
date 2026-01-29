@@ -1,0 +1,37 @@
+{
+  "comment": "",
+  "meta": [
+    {
+      "key": "locale",
+      "value": "en-US"
+    },
+    {
+      "key": "author",
+      "value": "Alice"
+    },
+    {
+      "key": "reviewer",
+      "value": "Bob"
+    },
+    {
+      "key": "created",
+      "value": "2024-01-01"
+    }
+  ],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["msg"],
+          "value": "Hello"
+        }
+      ]
+    }
+  ]
+}

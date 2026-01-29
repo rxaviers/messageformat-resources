@@ -1,0 +1,48 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": ["ui", "buttons"],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["save"],
+          "value": "Save"
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["cancel"],
+          "value": "Cancel"
+        }
+      ]
+    },
+    {
+      "comment": "",
+      "meta": [],
+      "id": ["ui", "labels"],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["name"],
+          "value": "Name"
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["email"],
+          "value": "Email"
+        }
+      ]
+    }
+  ]
+}

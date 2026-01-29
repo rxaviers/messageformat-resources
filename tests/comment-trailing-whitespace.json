@@ -1,0 +1,20 @@
+{
+  "comment": "Comment with trailing spaces",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["hello"],
+          "value": "Hello"
+        }
+      ]
+    }
+  ]
+}

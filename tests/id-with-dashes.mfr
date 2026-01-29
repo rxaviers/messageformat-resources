@@ -1,0 +1,4 @@
+---
+my-key = Value with dashes
+key-with-many-dashes = Another value
+-starts-with-dash = Starting dash

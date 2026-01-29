@@ -1,0 +1,20 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "This message greets the user",
+          "meta": [],
+          "id": ["hello"],
+          "value": "Hello, {$name}!"
+        }
+      ]
+    }
+  ]
+}

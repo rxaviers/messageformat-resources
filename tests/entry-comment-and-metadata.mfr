@@ -1,0 +1,5 @@
+---
+# Greeting message with personalization
+@param $name - The user's display name
+@example Hello, Alice!
+hello = Hello, {$name}!

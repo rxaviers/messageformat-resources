@@ -1,0 +1,20 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "Error messages for validation",
+      "meta": [],
+      "id": ["errors"],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["required"],
+          "value": "This field is required"
+        }
+      ]
+    }
+  ]
+}

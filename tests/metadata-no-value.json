@@ -1,0 +1,25 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [
+            {
+              "key": "deprecated",
+              "value": ""
+            }
+          ],
+          "id": ["old-message"],
+          "value": "Don't use this"
+        }
+      ]
+    }
+  ]
+}

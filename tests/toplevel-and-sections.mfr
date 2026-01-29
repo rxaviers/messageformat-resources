@@ -1,0 +1,5 @@
+---
+top-level = I'm at the top
+
+[section]
+in-section = I'm in a section

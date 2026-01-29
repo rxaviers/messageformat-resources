@@ -1,0 +1,20 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": ["very-long-section-name"],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["msg"],
+          "value": "Hello"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["count"],
+          "value": "\n.input {$count :integer}\n.match $count\n0   {{You have no messages.}}\none {{You have {$count} message.}}\n*   {{You have {$count} messages.}}"
+        }
+      ]
+    }
+  ]
+}

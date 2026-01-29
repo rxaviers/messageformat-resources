@@ -1,0 +1,27 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["button", "save"],
+          "value": "Save"
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["button", "cancel"],
+          "value": "Cancel"
+        }
+      ]
+    }
+  ]
+}

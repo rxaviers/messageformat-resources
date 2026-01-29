@@ -1,0 +1,6 @@
+---
+[greetings]
+hello = Hello
+
+[farewells]
+goodbye = Goodbye

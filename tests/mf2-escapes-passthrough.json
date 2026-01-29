@@ -1,0 +1,27 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["braces"],
+          "value": "Use \\{ and \\} for placeholders"
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["pipe"],
+          "value": "Use \\| for alternatives"
+        }
+      ]
+    }
+  ]
+}

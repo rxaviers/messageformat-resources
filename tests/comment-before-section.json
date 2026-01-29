@@ -1,0 +1,38 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["msg1"],
+          "value": "First"
+        },
+        {
+          "type": "comment",
+          "comment": "This comment is standalone because of empty line"
+        }
+      ]
+    },
+    {
+      "comment": "This comment attaches to the section",
+      "meta": [],
+      "id": ["section"],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["msg2"],
+          "value": "Second"
+        }
+      ]
+    }
+  ]
+}

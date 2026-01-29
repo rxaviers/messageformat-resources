@@ -1,0 +1,31 @@
+{
+  "comment": "",
+  "meta": [],
+  "sections": [
+    {
+      "comment": "",
+      "meta": [],
+      "id": [],
+      "entries": [
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["hello"],
+          "value": "Hello"
+        },
+        {
+          "type": "comment",
+          "comment": "This is a standalone comment that\nis not attached to any entry"
+        },
+        {
+          "type": "entry",
+          "comment": "",
+          "meta": [],
+          "id": ["goodbye"],
+          "value": "Goodbye"
+        }
+      ]
+    }
+  ]
+}

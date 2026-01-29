@@ -1,0 +1,5 @@
+# Resource comment
+@locale en-US
+@author John Doe
+---
+hello = Hello
