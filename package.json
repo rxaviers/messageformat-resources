@@ -1,0 +1,24 @@
+{
+  "name": "messageformat-resources",
+  "version": "0.1.0",
+  "description": "A parser for MessageFormat 2 Resource files (.mfr).",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./mod.ts",
+      "import": "./dist/mod.js"
+    }
+  },
+  "types": "./mod.ts",
+  "files": [
+    "dist",
+    "mod.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  }
+}

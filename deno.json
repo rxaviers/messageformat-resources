@@ -6,7 +6,18 @@
   "imports": {
     "@std/assert": "jsr:@std/assert@1"
   },
+  "tasks": {
+    "build:npm": "deno bundle --sourcemap=external --output dist/mod.js mod.ts",
+    "test": "deno test --allow-read",
+    "test:node": "deno task build:npm && node --test test.node.mjs"
+  },
   "publish": {
-    "exclude": ["tests/", "test.ts"]
+    "exclude": [
+      "tests/",
+      "test.ts",
+      "test.node.mjs",
+      "package.json",
+      "dist/"
+    ]
   }
 }

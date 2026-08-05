@@ -11,10 +11,29 @@ See the
 [MFR syntax explainer](https://github.com/w3c/i18n-discuss/blob/3e068fdb8a549935fdff8f8e36086d6dfdd6c476/explainers/message-resources.md)
 for full details on the file format.
 
+## Installation
+
+### Deno
+
+```sh
+deno add jsr:@luca/messageformat-resources
+```
+
+### Node.js / npm
+
+Requires Node.js 20 or later. This package is ESM-only.
+
+```sh
+npm install messageformat-resources
+```
+
 ## Usage
 
+The example below uses the npm package name. With Deno, import from
+`@luca/messageformat-resources` instead.
+
 ```ts
-import { flatten, parse } from "@luca/messageformat-resources";
+import { flatten, parse } from "messageformat-resources";
 
 const resource = parse(`
 # Application messages
