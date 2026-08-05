@@ -20,5 +20,8 @@
   "sideEffects": false,
   "engines": {
     "node": ">=20"
+  },
+  "scripts": {
+    "prepublishOnly": "deno task build:npm"
   }
 }
