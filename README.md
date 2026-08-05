@@ -14,7 +14,7 @@ for full details on the file format.
 ## Usage
 
 ```ts
-import { flatten, parse } from "@luca/messageformat-resources";
+import { flatten, parse, stringify } from "@luca/messageformat-resources";
 
 const resource = parse(`
 # Application messages
@@ -56,6 +56,84 @@ console.log(messages.get("hello"));
 console.log(messages.get("errors.required"));
 // { message: "This field is required.", metadata: { locale: "en-US", author: "translations-team" } }
 ```
+
+## Updating or Creating Resources
+
+`stringify()` is the inverse operation for flattened messages. Pass it a `Map`,
+an iterable of entries, or a plain object, followed by an optional options bag.
+When `options.original` is provided, it replaces only translatable values while
+retaining comments, metadata, whitespace, escapes, ordering, and line endings.
+New keys use the longest matching section; otherwise, a section is created from
+the key prefix.
+
+```ts
+const originalSource = `# Application messages
+@locale en-US
+---
+
+@param $name - Name of the user being greeted.
+hello = Hello, {$name}!
+
+[errors]
+required = This field is required.
+`;
+
+const translated = new Map([
+  ["hello", "Olá, {$name}!"],
+  ["errors.required", "Este campo é obrigatório."],
+  ["profile.title", "Perfil"],
+]);
+
+const output = stringify(translated, {
+  original: originalSource,
+  locale: "pt-BR",
+});
+
+console.log(output);
+```
+
+Output:
+
+```mfr
+# Application messages
+@locale pt-BR
+---
+
+@param $name - Name of the user being greeted.
+hello = Olá, {$name}!
+
+[errors]
+required = Este campo é obrigatório.
+
+[profile]
+title = Perfil
+```
+
+The resource comment and `@param` metadata remain unchanged, `@locale` and
+existing message values are updated, and the new `profile.title` key creates a
+`[profile]` section.
+
+The optional `locale` option updates resource-level `@locale` metadata and is
+also used when expanding plural categories. If the resource has no locale
+metadata—or no frontmatter—it is added in the correct position. The `original`
+option accepts MFR source text.
+
+Without an original resource, `stringify()` creates a minimal valid resource:
+
+```ts
+const output = stringify(
+  {
+    hello: "Hello!",
+    "errors.required": "This field is required.",
+  },
+  { locale: "en-US" },
+);
+```
+
+Values may also be `FlattenedMessage` objects returned by `flatten()`. Locale
+metadata is used for numeric selectors: missing CLDR plural categories are added
+using `Intl.PluralRules`. New categories initially copy the exhaustive `*`
+pattern, so they should be translated before publishing.
 
 ## Syntax Overview
 
