@@ -113,6 +113,45 @@ The resource comment and `@param` metadata remain unchanged, `@locale` and
 existing message values are updated, and the new `profile.title` key creates a
 `[profile]` section.
 
+### Resolving Section Ambiguity
+
+A flattened key combines its section path and entry ID with dots. That means the
+boundary between them is no longer encoded in the key. For example, both of
+these resources flatten to the key `profile.title`:
+
+```mfr
+[profile]
+title = Profile
+```
+
+```mfr
+profile.title = Profile
+```
+
+`stringify()` uses the original resource structure and a deterministic fallback
+to resolve this ambiguity:
+
+1. An existing key is updated in its current location.
+2. A new key uses the deepest existing section that matches a prefix of the key.
+   The remaining parts form the entry ID.
+3. If no named section matches, every part except the last creates a section;
+   the last part becomes the entry ID.
+4. A key with one part is written at the top level.
+
+For example:
+
+| Flattened key            | Existing section   | Output location                             |
+| ------------------------ | ------------------ | ------------------------------------------- |
+| `hello`                  | None               | Top-level entry `hello`                     |
+| `profile.title`          | None               | Section `[profile]`, entry `title`          |
+| `errors.network.timeout` | `[errors]`         | Section `[errors]`, entry `network.timeout` |
+| `errors.network.timeout` | `[errors.network]` | Section `[errors.network]`, entry `timeout` |
+
+Without an original resource, the third and fourth rules apply. To force a new
+entry into a particular section, include that section header in the original
+resource, even if the section is empty. A flattened key alone cannot request a
+new top-level dotted entry instead of a section.
+
 The optional `locale` option updates resource-level `@locale` metadata and is
 also used when expanding plural categories. If the resource has no locale
 metadata—or no frontmatter—it is added in the correct position. The `original`
