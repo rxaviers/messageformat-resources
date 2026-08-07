@@ -86,7 +86,10 @@ const translated = new Map([
 
 const output = stringify(translated, {
   original: originalSource,
-  locale: "pt-BR",
+  meta: {
+    locale: "pt-BR",
+    version: "2",
+  },
 });
 
 console.log(output);
@@ -97,6 +100,7 @@ Output:
 ```mfr
 # Application messages
 @locale pt-BR
+@version 2
 ---
 
 @param $name - Name of the user being greeted.
@@ -109,9 +113,9 @@ required = Este campo é obrigatório.
 title = Perfil
 ```
 
-The resource comment and `@param` metadata remain unchanged, `@locale` and
-existing message values are updated, and the new `profile.title` key creates a
-`[profile]` section.
+The resource comment and `@param` metadata remain unchanged, resource metadata
+and existing message values are updated, and the new `profile.title` key creates
+a `[profile]` section.
 
 ### Resolving Section Ambiguity
 
@@ -152,10 +156,11 @@ entry into a particular section, include that section header in the original
 resource, even if the section is empty. A flattened key alone cannot request a
 new top-level dotted entry instead of a section.
 
-The optional `locale` option updates resource-level `@locale` metadata and is
-also used when expanding plural categories. If the resource has no locale
-metadata—or no frontmatter—it is added in the correct position. The `original`
-option accepts MFR source text.
+The optional `meta` object updates resource-level metadata while retaining any
+properties it does not specify. Missing properties are inserted before
+frontmatter. `meta.locale` is also used when expanding plural categories. If the
+resource has no frontmatter, the requested metadata and frontmatter marker are
+added in the correct position. The `original` option accepts MFR source text.
 
 Without an original resource, `stringify()` creates a minimal valid resource:
 
@@ -165,7 +170,7 @@ const output = stringify(
     hello: "Hello!",
     "errors.required": "This field is required.",
   },
-  { locale: "en-US" },
+  { meta: { locale: "en-US" } },
 );
 ```
 

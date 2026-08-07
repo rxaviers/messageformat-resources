@@ -244,12 +244,12 @@ export type MessageEntries =
   | Iterable<readonly [string, MessageValue]>
   | Readonly<Record<string, MessageValue>>;
 
-/** Options controlling source preservation and locale-specific output. */
+/** Options controlling source preservation and resource-level metadata. */
 export interface StringifyOptions {
   /** Original MFR source text to update in place. */
   original?: string;
-  /** Structurally valid locale to write to metadata and use for plurals. */
-  locale?: string;
+  /** Resource-level metadata to update or insert before frontmatter. */
+  meta?: Readonly<Record<string, string>>;
 }
 
 /** Internal message shape shared by all supported key-value input forms. */
@@ -296,17 +296,19 @@ interface SourceIndex {
  * endings) is retained. New keys are placed in the longest matching existing
  * section, or in a new section derived from the key.
  *
- * Locale metadata is used to make single-selector numeric messages exhaustive
- * for the locale. For example, an Arabic resource receives `zero`, `two`,
- * `few`, and `many` variants when the input only contains English-style `one`
- * and fallback variants. Missing variants initially copy the fallback pattern
- * so that the result remains usable and ready for translation.
+ * Resource metadata in `options.meta` is updated or inserted before the
+ * frontmatter marker. Its `locale` value is also used to make single-selector
+ * numeric messages exhaustive for the locale. For example, an Arabic resource
+ * receives `zero`, `two`, `few`, and `many` variants when the input only
+ * contains English-style `one` and fallback variants. Missing variants
+ * initially copy the fallback pattern so that the result remains usable and
+ * ready for translation.
  *
  * @param messages Flattened message keys and their MF2 message values
- * @param options Original resource and locale output options
+ * @param options Original resource and resource metadata output options
  * @returns A valid MFR source string
- * @throws {TypeError} If `options` is not an object or `original` is not text
- * @throws {RangeError} If `options.locale` is not a valid language tag
+ * @throws {TypeError} If the options, original source, or metadata are invalid
+ * @throws {RangeError} If `options.meta.locale` is not a valid language tag
  *
  * @example
  * ```ts
@@ -315,7 +317,7 @@ interface SourceIndex {
  *     ["hello", "Hello!"],
  *     ["errors.required", "This field is required."],
  *   ]),
- *   { original: originalSource, locale: "pt-BR" },
+ *   { original: originalSource, meta: { locale: "pt-BR" } },
  * );
  * ```
  */
@@ -328,23 +330,22 @@ export function stringify(
   ) {
     throw new TypeError("Stringify options must be an object");
   }
-  const { original = "", locale } = options;
+  const { original = "", meta } = options;
   if (typeof original !== "string") {
     throw new TypeError("Original resource must be a string");
   }
+  const resourceMeta = normalizeResourceMetadata(meta);
+  const locale = resourceMeta.get("locale");
   if (locale !== undefined) {
-    if (typeof locale !== "string") {
-      throw new TypeError("Locale must be a string");
-    }
     Intl.getCanonicalLocales(locale);
   }
 
   const values = normalizeMessages(messages);
   const source = original;
-  if (values.size === 0 && locale === undefined) return source;
+  if (values.size === 0 && resourceMeta.size === 0) return source;
 
   if (source === "") {
-    return createResource(values, locale);
+    return createResource(values, resourceMeta);
   }
 
   // Parsing first gives us the same key and metadata semantics as flatten().
@@ -374,8 +375,8 @@ export function stringify(
 
   const additions = [...values].filter(([key]) => !seen.has(key));
   addNewEntries(source, index, originalMessages, additions, edits, locale);
-  if (locale !== undefined) {
-    planLocaleMetadataUpdate(source, index.newline, locale, edits);
+  if (resourceMeta.size > 0) {
+    planResourceMetadataUpdates(source, index.newline, resourceMeta, edits);
   }
 
   edits.sort((a, b) => b.start - a.start || b.end - a.end);
@@ -387,8 +388,8 @@ export function stringify(
 }
 
 /** Renders a normalized metadata value with valid continuation indentation. */
-function renderMetadataValue(value: string): string {
-  return value.split("\n").map(encodeMetadataLine).join("\n  ");
+function renderMetadataValue(value: string, newline = "\n"): string {
+  return value.split("\n").map(encodeMetadataLine).join(`${newline}  `);
 }
 
 /** Escapes one logical metadata line according to resource value syntax. */
@@ -453,11 +454,37 @@ function normalizeMessages(
   return result;
 }
 
+/** Normalizes and validates resource metadata supplied to {@link stringify}. */
+function normalizeResourceMetadata(
+  meta: StringifyOptions["meta"],
+): Map<string, string> {
+  if (meta === undefined) return new Map();
+  if (meta === null || typeof meta !== "object" || Array.isArray(meta)) {
+    throw new TypeError("Resource metadata must be an object");
+  }
+
+  const result = new Map<string, string>();
+  for (const [key, value] of Object.entries(meta)) {
+    // Match the metadata identifier subset currently accepted by parse().
+    if (!/^[a-zA-Z0-9_-]+$/.test(key)) {
+      throw new TypeError(`Invalid resource metadata key: ${key}`);
+    }
+    if (typeof value !== "string") {
+      throw new TypeError(
+        `Resource metadata value for ${key} must be a string`,
+      );
+    }
+    result.set(key, value);
+  }
+  return result;
+}
+
 /** Creates a minimal canonical resource when no original source is supplied. */
 function createResource(
   values: Map<string, NormalizedMessage>,
-  locale?: string,
+  meta: Map<string, string>,
 ): string {
+  const locale = meta.get("locale");
   const groups = new Map<
     string,
     { section: string[]; entries: [string, NormalizedMessage][] }
@@ -474,11 +501,10 @@ function createResource(
     group.entries.push([id, value]);
   }
 
-  const blocks: string[] = [
-    locale === undefined
-      ? "---"
-      : `@locale ${renderMetadataValue(locale)}\n---`,
-  ];
+  const metadata = [...meta].map(([key, value]) =>
+    formatResourceMetadata(key, value, "\n")
+  );
+  const blocks: string[] = [[...metadata, "---"].join("\n")];
   const orderedGroups = [...groups.values()].sort((a, b) =>
     Number(a.section.length > 0) - Number(b.section.length > 0)
   );
@@ -593,38 +619,55 @@ function addNewEntries(
   }
 }
 
+/** Formats one resource metadata property, including multiline values. */
+function formatResourceMetadata(
+  key: string,
+  value: string,
+  newline: string,
+): string {
+  const encoded = renderMetadataValue(value, newline);
+  return `@${key}${value === "" ? "" : ` ${encoded}`}`;
+}
+
 /**
- * Plans a source-preserving update of resource-level `@locale` metadata.
- * Missing metadata is inserted immediately before frontmatter; a resource
- * without frontmatter receives both metadata and the required marker.
+ * Plans source-preserving updates of resource-level metadata. Missing keys are
+ * inserted immediately before frontmatter; a resource without frontmatter
+ * receives the requested metadata followed by the required marker.
  */
-function planLocaleMetadataUpdate(
+function planResourceMetadataUpdates(
   source: string,
   newline: string,
-  locale: string,
+  meta: Map<string, string>,
   edits: { start: number; end: number; text: string }[],
 ): void {
   const lines = sourceLines(source);
   const frontmatterIndex = lines.findIndex((line) =>
     /^---[ \t]*$/.test(line.text)
   );
-  const encodedLocale = renderMetadataValue(locale);
 
   if (frontmatterIndex < 0) {
+    const metadata = [...meta].map(([key, value]) =>
+      formatResourceMetadata(key, value, newline)
+    ).join(newline);
     edits.push({
       start: 0,
       end: 0,
-      text: `@locale ${encodedLocale}${newline}---${newline}`,
+      text: `${metadata}${newline}---${newline}`,
     });
     return;
   }
 
-  let found = false;
+  const found = new Set<string>();
   for (let i = 0; i < frontmatterIndex; i++) {
     const line = lines[i];
-    const match = line.text.match(/^@locale(?:([ \t]+)(.*))?$/);
+    const match = line.text.match(
+      /^@([a-zA-Z0-9_-]+)(?:([ \t]+)(.*))?$/,
+    );
     if (!match) continue;
-    found = true;
+    const key = match[1];
+    const value = meta.get(key);
+    if (value === undefined) continue;
+    found.add(key);
 
     let last = i;
     while (
@@ -632,22 +675,27 @@ function planLocaleMetadataUpdate(
     ) {
       last++;
     }
-    const hasSeparator = match[1] !== undefined;
+    const hasSeparator = match[2] !== undefined;
+    const encoded = renderMetadataValue(value, newline);
     edits.push({
       start: hasSeparator
-        ? line.start + "@locale".length + match[1].length
+        ? line.start + key.length + 1 + match[2].length
         : line.contentEnd,
       end: lines[last].contentEnd,
-      text: hasSeparator ? encodedLocale : ` ${encodedLocale}`,
+      text: hasSeparator ? encoded : value === "" ? "" : ` ${encoded}`,
     });
     i = last;
   }
 
-  if (!found) {
+  const missing = [...meta].filter(([key]) => !found.has(key));
+  if (missing.length > 0) {
+    const metadata = missing.map(([key, value]) =>
+      formatResourceMetadata(key, value, newline)
+    ).join(newline);
     edits.push({
       start: lines[frontmatterIndex].start,
       end: lines[frontmatterIndex].start,
-      text: `@locale ${encodedLocale}${newline}`,
+      text: `${metadata}${newline}`,
     });
   }
 }

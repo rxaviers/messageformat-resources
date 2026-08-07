@@ -284,17 +284,24 @@ timeout = Timed out
 });
 
 Deno.test("stringify - writes locale metadata in a new resource", () => {
-  const result = stringify({ hello: "Olá" }, { locale: "pt-BR" });
+  const result = stringify(
+    { hello: "Olá" },
+    { meta: { locale: "pt-BR", version: "2" } },
+  );
 
   assertEquals(
     result,
     `@locale pt-BR
+@version 2
 ---
 
 hello = Olá
 `,
   );
-  assertEquals(parse(result).meta, [{ key: "locale", value: "pt-BR" }]);
+  assertEquals(parse(result).meta, [
+    { key: "locale", value: "pt-BR" },
+    { key: "version", value: "2" },
+  ]);
 });
 
 Deno.test("stringify - rejects positional options", () => {
@@ -328,7 +335,7 @@ hello = Hello
 `;
   const result = stringify(
     { hello: "Bonjour" },
-    { original, locale: "fr" },
+    { original, meta: { locale: "fr" } },
   );
 
   assertEquals(
@@ -351,15 +358,21 @@ Deno.test("stringify - preserves formatting around existing locale metadata", ()
     "hello = Hello",
     "",
   ].join("\r\n");
-  const result = stringify({}, { original, locale: "pt-BR" });
+  const result = stringify(
+    {},
+    { original, meta: { locale: "pt-BR", version: "2.0" } },
+  );
 
-  assertEquals(result, original.replace("en-US", "pt-BR"));
+  assertEquals(
+    result,
+    original.replace("en-US", "pt-BR").replace("1.0", "2.0"),
+  );
 });
 
 Deno.test("stringify - adds frontmatter when only locale changes", () => {
   const original = `hello = Hello
 `;
-  const result = stringify({}, { original, locale: "de" });
+  const result = stringify({}, { original, meta: { locale: "de" } });
 
   assertEquals(
     result,
@@ -385,7 +398,10 @@ items =
 `;
 
   const input = flatten(parse(original));
-  const result = stringify(input, { original, locale: "ar" });
+  const result = stringify(input, {
+    original,
+    meta: { locale: "ar" },
+  });
   const message = flatten(parse(result)).get("cart.items")?.message ?? "";
 
   assertEquals(message.includes("zero   {{عناصر}}"), true);
